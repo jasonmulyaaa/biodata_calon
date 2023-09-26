@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('pelatihan', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_biodata');
+            $table->unsignedBigInteger('biodata_id');
             $table->string('nama_pelatihan', 40);
             $table->enum('sertifikat', ['ada', 'tidak']);
             $table->integer('tahun');
             $table->timestamps();
+
+            $table->foreign('biodata_id')->references('id')->on('biodata')->onDelete('cascade');
         });
     }
 

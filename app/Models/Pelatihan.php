@@ -10,4 +10,8 @@ class Pelatihan extends Model
     protected $table = 'pelatihan';
     protected $guarded;
     use HasFactory;
+
+    public function biodata(){
+        return $this->belongsTo(Biodata::class);
+    }
 }

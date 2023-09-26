@@ -189,7 +189,7 @@
                 </div>
                 <div class="form-group">
                   <strong>Gambar</strong>
-                  <img class="img-preview img-fluid mb-3 col-sm-5">
+                  <img class="img-preview img-fluid mb-3 col-sm-5" width="100">
                   <div class="input-group mb-3">
                       <input type="file" class="form-control" @error('gambar') is-invalid @enderror name="gambar" id="image" onchange="previewImage()">
                       @error('gambar')

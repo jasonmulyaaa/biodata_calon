@@ -62,7 +62,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pendidikan as $pendidikan)
+                        @foreach ($biodata->pendidikan as $pendidikan)
                       <tr>
                         <td>
                     <input type="text" name="inputs[0][pendidikan_terakhir]" class="form-control" id="pendidikan_terakhir" placeholder="Pendidikan Terakhir" disabled value="{{ $pendidikan->pendidikan_terakhir }}">
@@ -94,7 +94,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pelatihan as $pelatihan)
+                        @foreach ($biodata->pelatihan as $pelatihan)
                       <tr>
                         <td>
                     <input type="text" name="inputs1[0][nama_pelatihan]" class="form-control" id="nama_pelatihan" placeholder="Nama Pelatihan" disabled value="{{ $pelatihan->nama_pelatihan }}">
@@ -122,7 +122,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($pekerjaan as $pekerjaan)
+                        @foreach ($biodata->pekerjaan as $pekerjaan)
                         <tr>
                           <td>
                       <input type="text" name="inputs2[0][nama_perusahaan]" class="form-control" id="nama_perusahaan" placeholder="Nama Perusahaan" disabled value="{{ $pekerjaan->nama_perusahaan }}">
@@ -148,7 +148,7 @@
                 <!-- /.card-body -->
                 <label for="gambar">Gambar</label>
                 <div class="form-group">
-                    <img class="img-preview img-fluid" src="{{ asset('storage/'. $biodata->gambar) }}">
+                    <img class="img-preview img-fluid" src="{{ asset('storage/'. $biodata->gambar) }}" width="100">
                 </div>
                 <div class="card-footer">
             <a href="{{ route('biodata.index') }}" class="btn btn-info">Back</a>

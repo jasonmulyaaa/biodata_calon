@@ -10,4 +10,8 @@ class Pekerjaan extends Model
     protected $table = 'pekerjaan';
     protected $guarded;
     use HasFactory;
+
+    public function biodata(){
+        return $this->belongsTo(Biodata::class);
+    }
 }

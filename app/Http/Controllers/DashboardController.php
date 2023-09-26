@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Biodata;
-use App\Models\Pekerjaan;
-use App\Models\Pendidikan;
-use App\Models\Pelatihan;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -17,8 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $biodata = Biodata::all();
-
+        $biodata = Biodata::latest()->get();
         return view('dashboard.index', compact('biodata'));
     }
 
@@ -51,12 +47,9 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        $biodata = Biodata::findorFail($id);
-        $pendidikan = Pendidikan::where('id_biodata', $biodata->id)->get();
-        $pelatihan = Pelatihan::where('id_biodata', $biodata->id)->get();
-        $pekerjaan = Pekerjaan::where('id_biodata', $biodata->id)->get();
+        $biodata = Biodata::with(['pendidikan', 'pelatihan', 'pekerjaan'])->findorFail($id);
 
-        return view('dashboard.show', compact('biodata', 'pendidikan', 'pelatihan', 'pekerjaan'));
+        return view('dashboard.show', compact('biodata'));
     }
 
     /**

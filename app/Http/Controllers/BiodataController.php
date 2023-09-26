@@ -18,7 +18,7 @@ class BiodataController extends Controller
      */
     public function index()
     {
-        $biodata = Biodata::where('id_user', Auth::user()->id)->first();
+        $biodata = Biodata::where('user_id', Auth::user()->id)->first();
         return view('biodata.index', compact('biodata'));
     }
 
@@ -45,6 +45,7 @@ class BiodataController extends Controller
             'last_name' => 'required|max:30',
             'address' => 'required',
             'city' => 'required|max:20',
+            'gambar' => 'image|file|required',
             'home_phone' => 'required|max:14',
             'cell_phone' => 'required|max:14',
             'email' => 'required|unique:biodata',
@@ -59,14 +60,18 @@ class BiodataController extends Controller
             'inputs1.*.nama_pelatihan' => 'required',
             'inputs1.*.sertifikat' => 'required',
             'inputs1.*.tahun' => 'required',
-        ]);
+        ],
+        [
+            'gambar' => 'Gambar harus berbentuk jpg/png/jpeg'
+        ]
+    );
 
         $image = $request->file('gambar')->store('post-images/biodata');
 
         $validate['gambar'] = $image;
 
         $biodata = Biodata::create([
-            'id_user' => Auth::user()->id,
+            'user_id' => Auth::user()->id,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'gambar' => $validate['gambar'],
@@ -81,7 +86,7 @@ class BiodataController extends Controller
         ]);
 
 
-        $newField = 'id_biodata';
+        $newField = 'biodata_id';
         $newRecord = $biodata->id;
 
         foreach($request->inputs as $key => $value){
@@ -110,12 +115,10 @@ class BiodataController extends Controller
      */
     public function show($id)
     {   
-        $biodata = Biodata::findorFail($id);
-        $pendidikan = Pendidikan::where('id_biodata', $biodata->id)->get();
-        $pelatihan = Pelatihan::where('id_biodata', $biodata->id)->get();
-        $pekerjaan = Pekerjaan::where('id_biodata', $biodata->id)->get();
+        $biodata = Biodata::with(['pendidikan', 'pelatihan', 'pekerjaan'])->findorFail($id);
 
-        return view('biodata.show', compact('biodata', 'pendidikan', 'pelatihan', 'pekerjaan'));
+        // dd($biodata);
+        return view('biodata.show', compact('biodata'));
     }
 
     /**
@@ -126,12 +129,9 @@ class BiodataController extends Controller
      */
     public function edit($id)
     {
-        $biodata = Biodata::findorFail($id);
-        $pendidikan = Pendidikan::where('id_biodata', $biodata->id)->get();
-        $pelatihan = Pelatihan::where('id_biodata', $biodata->id)->get();
-        $pekerjaan = Pekerjaan::where('id_biodata', $biodata->id)->get();
+        $biodata = Biodata::with(['pendidikan', 'pelatihan', 'pekerjaan'])->findorFail($id);
 
-        return view('biodata.edit', compact('biodata', 'pendidikan', 'pelatihan', 'pekerjaan'));
+        return view('biodata.edit', compact('biodata'));
     }
 
     /**

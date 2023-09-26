@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('pekerjaan', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_biodata');
+            $table->unsignedBigInteger('biodata_id');
             $table->string('nama_perusahaan', 45);
             $table->string('posisi', 35);
             $table->integer('pendapatan');
             $table->integer('tahun');
             $table->timestamps();
+
+            $table->foreign('biodata_id')->references('id')->on('biodata')->onDelete('cascade');
         });
     }
 

@@ -81,7 +81,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pendidikan as $pendidikan)
+                        @foreach ($biodata->pendidikan as $pendidikan)
                       <tr>
                         <td>
                     <input type="text" name="inputs[0][pendidikan_terakhir]" class="form-control" id="pendidikan_terakhir" placeholder="Pendidikan Terakhir" required value="{{ $pendidikan->pendidikan_terakhir }}">
@@ -117,7 +117,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pelatihan as $pelatihan)
+                        @foreach ($biodata->pelatihan as $pelatihan)
                       <tr>
                         <td>
                     <input type="text" name="inputs1[0][nama_pelatihan]" class="form-control" id="nama_pelatihan" placeholder="Nama Pelatihan" required value="{{ $pelatihan->nama_pelatihan }}">
@@ -149,7 +149,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($pekerjaan as $pekerjaan)
+                        @foreach ($biodata->pekerjaan as $pekerjaan)
                         <tr>
                           <td>
                       <input type="text" name="inputs2[0][nama_perusahaan]" class="form-control" id="nama_perusahaan" placeholder="Nama Perusahaan" required value="{{ $pekerjaan->nama_perusahaan }}">

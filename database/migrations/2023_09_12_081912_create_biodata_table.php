@@ -15,19 +15,21 @@ return new class extends Migration
     {
         Schema::create('biodata', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_user');
+            $table->unsignedBigInteger('user_id');
             $table->string('first_name', 30);
             $table->string('last_name', 30);
             $table->string('address');
             $table->string('city', 20);
-            $table->integer('home_phone');
-            $table->integer('cell_phone');
+            $table->biginteger('home_phone');
+            $table->biginteger('cell_phone');
             $table->string('email')->unique();
             $table->string('applied_position', 35);
             $table->string('skill');
             $table->integer('salary');
             $table->string('gambar');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

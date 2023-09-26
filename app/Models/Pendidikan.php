@@ -10,4 +10,8 @@ class Pendidikan extends Model
     protected $table = 'pendidikan';
     protected $guarded;
     use HasFactory;
+
+    public function biodata(){
+        return $this->belongsTo(Biodata::class);
+    }
 }
